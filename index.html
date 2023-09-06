@@ -4,20 +4,27 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>rps-ui</title>
+    <title>🪨 📃 ✂</title>
     <link rel="stylesheet" href="assets/css/styles.min.css">
+    <script src="game.js" defer></script>
     <script src="script.js" defer></script>
 </head>
 
 <body>
     <h1 style="text-align: center;font-family: Acme, sans-serif;">Rock Paper Scissors</h1>
     <div class="play-buttons">
-        <button class="btn rock" type="button">Rock</button>
-        <button class="btn paper" type="button">Paper</button>
-        <button class="btn scissors" type="button">Scissors</button>
+        <button class="btn rock" type="button" id="rock">Rock</button>
+        <button class="btn paper" type="button" id="paper">Paper</button>
+        <button class="btn scissors" type="button" id="scissors">Scissors</button>
     </div>
     <div class="show-score">
-        <div class="screen"></div>
+        <div class="screen">
+            <p id="scoreboard">Begin the game!</p>
+            <p id="winner"></p>
+        </div>
+        <div class="reset">
+            <button class="btn reset" type="button" id="reset">Play again !</button>
+        </div>
     </div>
 </body>
 

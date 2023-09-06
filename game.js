@@ -1,74 +1,107 @@
-function getComputerChoice () {
-    const randomNumber = Math.floor(Math.random() * 3) + 1;
+let playerScore = 0;
+let computerScore = 0;
+const scoreText = document.querySelector("#scoreboard");
+const resultText = document.querySelector("#winner");
 
-    switch (randomNumber) {
-        case 1:
-        return 'rock';
+function getComputerChoice() {
+  const randomNumber = Math.floor(Math.random() * 3) + 1;
 
-        case 2:
-        return 'paper';
+  switch (randomNumber) {
+    case 1:
+      return "rock";
 
-        case 3:
-        return 'scissors';
+    case 2:
+      return "paper";
 
-        default:
-        return console.log('Geçersiz sayi');
-    }
-};
+    case 3:
+      return "scissors";
 
-
-
-function playerChoice () {
-    let playerChoice = prompt('Please choose: rock, paper or scissors');
-    playerChoice = playerChoice.toLowerCase();
-    return playerChoice;
+    default:
+      return console.log("Geçersiz sayi");
+  }
 }
 
+function determineWinner(userChoice, computerChoice) {
+  if (
+    userChoice !== "rock" &&
+    userChoice !== "paper" &&
+    userChoice !== "scissors"
+  ) {
+    return "You entered an invalid choice!";
+  }
 
-function determineWinner (userChoice, computerChoice) {
+  if (userChoice === computerChoice) {
+    return "The game is a tie!";
+  }
 
-    if (userChoice !== 'rock' && userChoice !== 'paper' && userChoice !== 'scissors') {
-        return 'You entered an invalid choice!';
+  if (userChoice === "rock") {
+    if (computerChoice === "paper") {
+      computerScore++;
+      return "Computer won!";
+    } else {
+      playerScore++;
+      return "You won!";
     }
+  }
 
-    if (userChoice === computerChoice) {
-        return 'The game is a tie!';
+  if (userChoice === "paper") {
+    if (computerChoice === "scissors") {
+      computerScore++;
+      return "Computer won!";
+    } else {
+      playerScore++;
+      return "You won!";
     }
+  }
 
-    if (userChoice === 'rock') {
-        if (computerChoice === 'paper') {
-            return 'Computer won!';
-        } else {
-            return 'You won!';
-        }
+  if (userChoice === "scissors") {
+    if (computerChoice === "rock") {
+      computerScore++;
+      return "Computer won!";
+    } else {
+      playerScore++;
+      return "You won!";
     }
-
-    if (userChoice === 'paper') {
-        if (computerChoice === 'scissors') {
-            return 'Computer won!';
-        } else {
-            return 'You won!';
-        }
-    }
-
-    if (userChoice === 'scissors') {
-        if (computerChoice === 'rock') {
-            return 'Computer won!';
-        } else {
-            return 'You won!';
-        }
-    }
-
+  }
 }
 
-function playGame () {
-    for (let i = 0; i < 3; i++) {
-        const userChoice = playerChoice();
-        const computerChoice = getComputerChoice();
-        console.log('You threw: ' + userChoice);
-        console.log('Computer threw: ' + computerChoice);
-        console.log(determineWinner(userChoice, computerChoice));
-    }
+function updateScore(playerScore, computerScore) {
+  if (playerScore === 5 && computerScore < 5) {
+    resultText.textContent = "You won the game!";
+  } else if (computerScore === 5 && playerScore < 5) {
+    resultText.textContent = "Computer won the game!";
+  } else {
+    resultText.textContent = "";
+  }
+  scoreText.textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
 }
 
-playGame()
+function playGame(e) {
+  const userChoice = e;
+  const computerChoice = getComputerChoice();
+  determineWinner(userChoice, computerChoice);
+  updateScore(playerScore, computerScore);
+}
+
+function resetGame() {
+  playerScore = 0;
+  computerScore = 0;
+  scoreText.textContent = "Begin the game!";
+  resultText.textContent = "";
+}
+
+const buttons = document.querySelectorAll(".btn");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () => {
+    userChoice = button.id;
+
+    return playGame(userChoice);
+  });
+});
+
+const resetButton = document.querySelector("#reset");
+
+resetButton.addEventListener("click", () => {
+  resetGame();
+});
