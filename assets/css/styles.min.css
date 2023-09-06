@@ -1,0 +1,28 @@
+body {
+  background: #dad677;
+}
+.play-buttons {
+  display: flex;
+  height: 200px;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.btn {
+  width: 200.75px;
+  height: 100px;
+  font-family: Acme, sans-serif;
+  font-size: 35px;
+  background: var(--bs-info-border-subtle);
+  color: var(--bs-gray-dark);
+}
+.show-score {
+  height: 200px;
+}
+.screen {
+  height: 100px;
+  margin: 0;
+  padding: 0;
+  width: 400px;
+  text-align: center;
+  background: #e4d8d8;
+}
