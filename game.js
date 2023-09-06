@@ -77,6 +77,9 @@ function updateScore(playerScore, computerScore) {
 }
 
 function playGame(e) {
+  if (playerScore === 5 || computerScore === 5) {
+    return;
+  }
   const userChoice = e;
   const computerChoice = getComputerChoice();
   determineWinner(userChoice, computerChoice);
